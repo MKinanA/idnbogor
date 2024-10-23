@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: scale(1.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+}
+
+:root {
+    --bg: 15, 15, 31;
+    --fg: 239, 239, 239;
+    --bg-solid: 0, 0, 0;
+    --fg-solid: 255, 255, 255;
+    --gap: 2rem;
+    --pad-x: 20vw;
+    --pad-y: 4rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Rubik, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    border: 0;
+    transition: all 0.5s ease-out;
+    color: #ffffff;
+    line-height: 1;
+}
+
+[no-interact], [no-interact] * {
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+*:focus {
+    outline: none;
+}
+
+[unscrollable] {
+    overflow-y: hidden !important;
+}
+
+html, body {
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+main {
+    height: 100vh;
+    width: 100vw;
+    overflow-y: auto;
+    background: rgb(var(--bg));
+}
+
+div.high /* For testing purposes */ {
+    height: 4096rem;
+}
+
+section#splash {
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgb(var(--bg-solid));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 2rem;
+}
+
+section#splash > img {
+    opacity: 0;
+    width: 8rem;
+}
+
+section#splash > [appear] {
+    animation: appear 0.5s ease-out;
+    opacity: 1;
+}
+
+section#splash:before {
+    --size: 2rem;
+    opacity: 0;
+    content: '';
+    position: absolute;
+    z-index: 999;
+    bottom: calc(50% - calc(var(--size / 2)));
+    left: calc(50% - calc(var(--size / 2)));
+    border-radius: 100%;
+    border: solid 0.25rem transparent;
+    border-top-color: rgb(var(--fg-solid));
+    height: var(--size);
+    width: var(--size);
+    animation: spin 1s linear infinite;
+    transition: none;
+}
+
+section#splash[loading]:before {
+    opacity: 1;
+    transition: all 0.5s ease-out;
+}
+
+section#splash[hidden] {
+    opacity: 0;
+    pointer-events: none;
+}
+
+[margin-top-100vh] {
+    margin-top: 100vh;
+}
+
+section {
+    position: relative;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--gap);
+    padding: var(--pad-y) var(--pad-x);
+}
+
+section#home {
+    height: 100vh;
+}
+
+section#home > div:first-of-type {
+    display: flex;
+    flex-direction: row;
+    gap: calc(var(--gap) / 2);
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    top: var(--pad-y);
+    left: 0;
+}
+
+section#home > div:first-of-type > img {
+    height: 4rem;
+}
+
+section#home > * {
+    text-align: center;
+}
+
+section#home > h2 {
+    font-size: 2rem;
+    margin-bottom: -1rem;
+    font-weight: 600;
+}
+
+section#home > h1 {
+    font-size: 3rem;
+    font-weight: 700;
+}
